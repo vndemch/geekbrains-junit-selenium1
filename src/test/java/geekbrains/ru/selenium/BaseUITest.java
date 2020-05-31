@@ -1,10 +1,7 @@
 package geekbrains.ru.selenium;
 
 //import io.github.bonigarcia.wdm.WebDriverManager;
-import geekbrains.ru.selenium.pom.AccountPage;
-import geekbrains.ru.selenium.pom.MainPage;
-import geekbrains.ru.selenium.pom.RegistrationPage;
-import geekbrains.ru.selenium.pom.SignInPage;
+import geekbrains.ru.selenium.pom.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BaseUITest {
 
     protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected WebDriverWait wait,wait15;
     protected MainPage mainpage;
     protected SignInPage signinpage;
     protected RegistrationPage registrationPage;
     protected AccountPage accountPage;
+    protected ItemPage itemPage;
+    protected ShoppingCartPage shoppingCartPage;
 
     @BeforeEach
     public void init() {
@@ -32,6 +31,8 @@ public abstract class BaseUITest {
         signinpage = new SignInPage(driver,wait);
         registrationPage = new RegistrationPage(driver,wait);
         accountPage = new AccountPage(driver,wait);
+        itemPage = new ItemPage(driver,wait);
+        shoppingCartPage = new ShoppingCartPage(driver,wait);
     }
 
     @AfterEach
