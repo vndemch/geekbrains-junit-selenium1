@@ -8,6 +8,7 @@ public class MainPage extends BasePage {
 
     public static final String HOME_URL = "http://automationpractice.com";
     private static final By SIGN_IN_BTN = By.cssSelector(".login");
+    private static final By ITEM_TO_BUY = By.cssSelector(".tab-content > ul > li");
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -19,6 +20,10 @@ public class MainPage extends BasePage {
 
     public void goToSignIn() {
         click(SIGN_IN_BTN);
+    }
+
+    public void goToItem() {
+        click(ITEM_TO_BUY);
     }
 
 }

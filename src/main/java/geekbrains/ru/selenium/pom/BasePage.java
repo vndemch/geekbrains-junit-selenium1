@@ -41,4 +41,22 @@ public abstract class BasePage {
         }
     }
 
+    public void waitABit(int sec) {
+        try {
+            Thread.sleep(sec);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isElementClicable(By by) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+
 }

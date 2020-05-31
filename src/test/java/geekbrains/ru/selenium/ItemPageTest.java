@@ -1,7 +1,5 @@
 package geekbrains.ru.selenium;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,12 +11,10 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RegistrationPageTests extends BaseUITest {
-
-
+public class ItemPageTest extends BaseUITest {
     @ParameterizedTest
     @MethodSource(value = "regDataGen")
-    public void regPageTest(String[] arr) {
+    public void accPageTest(String[] arr) {
         mainpage.toHome();
         mainpage.goToSignIn();
         signinpage.generateNewRandomEmailAccountAndGoToRegistration(5);
@@ -26,8 +22,20 @@ public class RegistrationPageTests extends BaseUITest {
         assertEquals("YOUR PERSONAL INFORMATION", registrationPage.getRegistrationPageFormText().toUpperCase());
         registrationPage.RegistrationFormFill(arr);
         assertTrue(accountPage.isAccountPageHeaderPresent());
-        assertEquals("MY ACCOUNT", accountPage.getAccountPageHeaderText());
+        assertEquals("MY ACCOUNT", accountPage.getAccountPageHeaderText().toUpperCase());
+        mainpage.toHome();
+        mainpage.goToItem();
+        assertTrue(itemPage.isItemPagePresent());
+        assertEquals("DATA SHEET", itemPage.getItemPageSubtitleText().toUpperCase());
+        String itemToBuy = itemPage.getSelectedItemName();
+        itemPage.addToCard();
+        assertTrue(itemPage.isShopButtonPresent());
+        itemPage.goToCart();
+        assertTrue(shoppingCartPage.isProductNamePresent());
+//        shoppingCartPage.goToItemPage();
+        assertEquals(itemToBuy.toLowerCase(), shoppingCartPage.getProductName().toLowerCase());
     }
+
 
     public static Stream<Arguments> regDataGen() {
         String[] firstnames = {"John","David","Bob","Max","Alex"};
@@ -38,14 +46,14 @@ public class RegistrationPageTests extends BaseUITest {
             // Пришлось использовать такую обертку (Arguments.of((Object)).
             // Иначе массив строк выдавал ошибку
             out.add(Arguments.of((Object) new String[] {
-            getRandomArrayItem(firstnames),
-            getRandomArrayItem(lastnames),
-            generateNumSequence(5),
-            "qwerty",
-            "qwerty",
-            "1",
-            generateNumSequence(5),
-            generateNumSequence(10)}
+                    getRandomArrayItem(firstnames),
+                    getRandomArrayItem(lastnames),
+                    generateNumSequence(5),
+                    "qwerty",
+                    "qwerty",
+                    "1",
+                    generateNumSequence(5),
+                    generateNumSequence(10)}
             ));
         }
         return out.stream();
