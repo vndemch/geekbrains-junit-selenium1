@@ -6,13 +6,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ItemPage extends BasePage {
 
-    public static final By ITEM_PAGE_SUBTITLE = By.cssSelector(".page-product-heading");
-    public static final By ADD_TO_CART_BUTTON = By.name("Submit");
-    public static final By SELECTED_ITEM_NAME = By.cssSelector(".pb-center-column > h1");
-    public static final By SHOPPING_CART_LINK = By.cssSelector(".btn.btn-default.button.button-medium");
+    private static final By ITEM_PAGE_SUBTITLE = By.cssSelector(".page-product-heading");
+    private static final By ADD_TO_CART_BUTTON = By.name("Submit");
+    private static final By SELECTED_ITEM_NAME = By.cssSelector(".pb-center-column > h1");
+    private static final By SHOPPING_CART_LINK = By.cssSelector(".btn.btn-default.button.button-medium");
+    private static final By CLOSE_NOTE = By.cssSelector(".cross");
 
-
-    public static final By CLOSE_NOTE = By.cssSelector(".cross");
 
     public ItemPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);

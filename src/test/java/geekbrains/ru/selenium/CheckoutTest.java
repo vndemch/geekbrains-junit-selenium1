@@ -11,18 +11,19 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ItemPageTest extends BaseUITest {
+public class CheckoutTest extends BaseUITest{
+
     @ParameterizedTest
     @MethodSource(value = "regDataGen")
     public void accPageTest(String[] arr) {
         mainpage.toHome();
         mainpage.goToSignIn();
         signinpage.generateNewRandomEmailAccountAndGoToRegistration(5);
-        assertTrue(registrationPage.isRegistrationPageFormPresent());
-        assertEquals("YOUR PERSONAL INFORMATION", registrationPage.getRegistrationPageFormText().toUpperCase());
+//        assertTrue(registrationPage.isRegistrationPageFormPresent());
+//        assertEquals("YOUR PERSONAL INFORMATION", registrationPage.getRegistrationPageFormText().toUpperCase());
         registrationPage.RegistrationFormFill(arr);
-        assertTrue(accountPage.isAccountPageHeaderPresent());
-        assertEquals("MY ACCOUNT", accountPage.getAccountPageHeaderText().toUpperCase());
+//        assertTrue(accountPage.isAccountPageHeaderPresent());
+//        assertEquals("MY ACCOUNT", accountPage.getAccountPageHeaderText().toUpperCase());
         mainpage.toHome();
         mainpage.goToItem();
         assertTrue(itemPage.isItemPagePresent());
@@ -33,12 +34,16 @@ public class ItemPageTest extends BaseUITest {
         itemPage.goToCart();
         assertTrue(shoppingCartPage.isProductNamePresent());
         assertEquals(itemToBuy.toLowerCase(), shoppingCartPage.getProductName().toLowerCase());
-//        shoppingCartPage.startCheckout();
-//        addressesPage.continueCheckoutWithAddress();
-//        assertTrue(shippingPage.isShippingPagePresent());
-//        assertEquals("SHIPPING", shippingPage.getShippingPageHeader().toUpperCase());
-//        shippingPage.acceptChkOn();
-//        shippingPage.continueCheckoutFromShipping();
+        shoppingCartPage.startCheckout();
+        addressesPage.continueCheckoutWithAddress();
+        assertTrue(shippingPage.isShippingPagePresent());
+        assertEquals("SHIPPING", shippingPage.getShippingPageHeader().toUpperCase());
+        shippingPage.acceptChkOn();
+        shippingPage.continueCheckoutFromShipping();
+        paymentPage.payByBankWire();
+        orderSummaryPage.confirmOrder();
+        assertTrue(orderConfirmedPage.isOrderConfirmationHeaderPresent());
+        assertEquals("ORDER CONFIRMATION", orderConfirmedPage.getOrderConfirmationHeaderText().toUpperCase());
     }
 
 

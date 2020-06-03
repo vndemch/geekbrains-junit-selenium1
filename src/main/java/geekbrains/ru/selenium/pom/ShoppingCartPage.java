@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ShoppingCartPage extends BasePage {
 
     public static final By PRODUCT_NAME = By.cssSelector("td > p >a");
+    public static final By CHECKOUT_BUTTON = By.cssSelector(".standard-checkout");
 
 
     public ShoppingCartPage(WebDriver driver, WebDriverWait wait) {
@@ -23,7 +24,9 @@ public class ShoppingCartPage extends BasePage {
         if(isElementClicable(PRODUCT_NAME)) { click(PRODUCT_NAME);}
     }
 
-
+    public void startCheckout() {
+        click(CHECKOUT_BUTTON);
+    }
 
 
 }
