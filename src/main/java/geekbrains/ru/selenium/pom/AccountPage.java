@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AccountPage extends BasePage {
-    public static final By ACCOUNTPAGEHEADER = By.cssSelector(".page-heading");
+    private static final By ACCOUNTPAGEHEADER = By.cssSelector(".page-heading");
 
 
     public AccountPage(WebDriver driver, WebDriverWait wait) {

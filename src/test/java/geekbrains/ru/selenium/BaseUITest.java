@@ -1,15 +1,16 @@
 package geekbrains.ru.selenium;
 
-//import io.github.bonigarcia.wdm.WebDriverManager;
-import geekbrains.ru.selenium.pom.AccountPage;
-import geekbrains.ru.selenium.pom.MainPage;
-import geekbrains.ru.selenium.pom.RegistrationPage;
-import geekbrains.ru.selenium.pom.SignInPage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import geekbrains.ru.selenium.pom.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 public abstract class BaseUITest {
 
@@ -19,12 +20,29 @@ public abstract class BaseUITest {
     protected SignInPage signinpage;
     protected RegistrationPage registrationPage;
     protected AccountPage accountPage;
+    protected ItemPage itemPage;
+    protected ShoppingCartPage shoppingCartPage;
+    protected CheckoutOrder checkoutOrder;
 
-    @BeforeEach
-    public void init() {
-//        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
+    @BeforeClass
+    @Parameters({"browser"})
+    public void init(@Optional(value = "chrome") String browser) {
+
+        switch (browser) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+        }
+        wait = new WebDriverWait(driver, 50);
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com");
 
@@ -32,10 +50,15 @@ public abstract class BaseUITest {
         signinpage = new SignInPage(driver,wait);
         registrationPage = new RegistrationPage(driver,wait);
         accountPage = new AccountPage(driver,wait);
+        itemPage = new ItemPage(driver,wait);
+        shoppingCartPage = new ShoppingCartPage(driver,wait);
+        checkoutOrder = new CheckoutOrder(driver,wait);
     }
 
-    @AfterEach
+    @AfterClass
     public void shutdown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
