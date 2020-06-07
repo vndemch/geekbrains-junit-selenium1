@@ -22,11 +22,7 @@ public abstract class BaseUITest {
     protected AccountPage accountPage;
     protected ItemPage itemPage;
     protected ShoppingCartPage shoppingCartPage;
-    protected AddressesPage addressesPage;
-    protected ShippingPage shippingPage;
-    protected PaymentPage paymentPage;
-    protected OrderSummaryPage orderSummaryPage;
-    protected OrderConfirmedPage orderConfirmedPage;
+    protected CheckoutOrder checkoutOrder;
 
     @BeforeClass
     @Parameters({"browser"})
@@ -56,11 +52,7 @@ public abstract class BaseUITest {
         accountPage = new AccountPage(driver,wait);
         itemPage = new ItemPage(driver,wait);
         shoppingCartPage = new ShoppingCartPage(driver,wait);
-        addressesPage = new AddressesPage(driver,wait);
-        shippingPage = new ShippingPage(driver,wait);
-        paymentPage = new PaymentPage(driver,wait);
-        orderSummaryPage = new OrderSummaryPage(driver,wait);
-        orderConfirmedPage = new OrderConfirmedPage(driver,wait);
+        checkoutOrder = new CheckoutOrder(driver,wait);
     }
 
     @AfterClass

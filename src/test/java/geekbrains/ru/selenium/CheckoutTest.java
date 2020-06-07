@@ -26,15 +26,15 @@ public class CheckoutTest extends BaseUITest{
         Assert.assertTrue(shoppingCartPage.isProductNamePresent());
         Assert.assertEquals(itemToBuy.toLowerCase(), shoppingCartPage.getProductName().toLowerCase());
         shoppingCartPage.startCheckout();
-        addressesPage.continueCheckoutWithAddress();
-        Assert.assertTrue(shippingPage.isShippingPagePresent());
-        Assert.assertEquals(shippingPage.getShippingPageHeader().toUpperCase(),"SHIPPING");
-        shippingPage.acceptChkOn();
-        shippingPage.continueCheckoutFromShipping();
-        paymentPage.payByBankWire();
-        orderSummaryPage.confirmOrder();
-        Assert.assertTrue(orderConfirmedPage.isOrderConfirmationHeaderPresent());
-        Assert.assertEquals(orderConfirmedPage.getOrderConfirmationHeaderText().toUpperCase(),"ORDER CONFIRMATION");
+        checkoutOrder.continueCheckoutWithAddress();
+        Assert.assertTrue(checkoutOrder.isShippingPagePresent());
+        Assert.assertEquals(checkoutOrder.getShippingPageHeader().toUpperCase(),"SHIPPING");
+        checkoutOrder.acceptChkOn();
+        checkoutOrder.continueCheckoutFromShipping();
+        checkoutOrder.payByBankWire();
+        checkoutOrder.confirmOrder();
+        Assert.assertTrue(checkoutOrder.isOrderConfirmationHeaderPresent());
+        Assert.assertEquals(checkoutOrder.getOrderConfirmationHeaderText().toUpperCase(),"ORDER CONFIRMATION");
     }
 
     @DataProvider(name = "testData")
@@ -49,7 +49,8 @@ public class CheckoutTest extends BaseUITest{
                         generateNumSequence(5),
                         "qwerty",
                         "qwerty",
-                        "Alabama",
+                        //"Alabama",
+                        "1",
                         generateNumSequence(5),
                         generateNumSequence(10)
                 }
