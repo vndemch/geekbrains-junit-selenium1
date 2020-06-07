@@ -1,17 +1,21 @@
 package geekbrains.ru.selenium;
 
-//import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import geekbrains.ru.selenium.pom.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 public abstract class BaseUITest {
 
     protected WebDriver driver;
-    protected WebDriverWait wait,wait15;
+    protected WebDriverWait wait;
     protected MainPage mainpage;
     protected SignInPage signinpage;
     protected RegistrationPage registrationPage;
@@ -24,11 +28,25 @@ public abstract class BaseUITest {
     protected OrderSummaryPage orderSummaryPage;
     protected OrderConfirmedPage orderConfirmedPage;
 
-    @BeforeEach
-    public void init() {
-//        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
+    @BeforeClass
+    @Parameters({"browser"})
+    public void init(@Optional(value = "chrome") String browser) {
+
+        switch (browser) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+        }
+        wait = new WebDriverWait(driver, 50);
         driver.manage().window().maximize();
         driver.get("http://automationpractice.com");
 
@@ -45,8 +63,10 @@ public abstract class BaseUITest {
         orderConfirmedPage = new OrderConfirmedPage(driver,wait);
     }
 
-    @AfterEach
+    @AfterClass
     public void shutdown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

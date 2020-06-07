@@ -1,20 +1,20 @@
 package geekbrains.ru.selenium;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.params.ParameterizedTest;
+//import org.junit.jupiter.params.provider.Arguments;
+//import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegistrationPageTests extends BaseUITest {
-
+/*
 
     @ParameterizedTest
     @MethodSource(value = "regDataGen")
@@ -62,5 +62,5 @@ public class RegistrationPageTests extends BaseUITest {
     public static String getRandomArrayItem(String[] arr) {
         return arr[(int)(Math.random()*(arr.length))];
     }
-
+*/
 }

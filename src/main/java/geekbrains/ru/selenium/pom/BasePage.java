@@ -57,6 +57,14 @@ public abstract class BasePage {
             return false;
         }
     }
+    public boolean isElementVisible(By by) {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
 
 }

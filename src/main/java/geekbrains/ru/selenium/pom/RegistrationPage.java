@@ -39,7 +39,8 @@ public class RegistrationPage extends BasePage {
         type(data[3],ADDRESS);
         type(data[4],CITY);
         Select select = new Select(driver.findElement(STATE));
-        select.selectByIndex(Integer.parseInt(data[5]));
+        select.selectByVisibleText(data[5]);
+//        select.selectByIndex(Integer.parseInt(data[5]));
         type(data[6],ZIP);
         type(data[7],MOBILE);
         click(SUBMIT_BTN);

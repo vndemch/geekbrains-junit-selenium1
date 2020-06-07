@@ -1,10 +1,7 @@
 package geekbrains.ru.selenium;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class MainTest extends BaseUITest {
 
@@ -12,7 +9,7 @@ public class MainTest extends BaseUITest {
     public void mainPageTest() {
         mainpage.toHome();
         mainpage.goToSignIn();
-        assertTrue(signinpage.isSignInPageHeaderPresent());
-        assertEquals("authentication", signinpage.getSignInPageHeaderText().toLowerCase());
+        Assert.assertTrue(signinpage.isSignInPageHeaderPresent());
+        Assert.assertEquals("authentication", signinpage.getSignInPageHeaderText().toLowerCase());
     }
 }
